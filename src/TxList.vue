@@ -1,22 +1,16 @@
-<template>
-  <div id="txs">
-    <h2>Pending Txs</h2>
-    <transition-group name="item" tag="ul" class="list">
-      <li v-for="tx in txs" :key="tx.hash" class="item" v-bind:class="{contract: tx.input!='0x'}">
-        <router-link :to="{path: `/tx/${tx.hash}`}">
-          <p>TX# {{tx.hash}}</p>
-          <div>
-            <p>From: {{tx.from}}</p>
-            <p>To: {{tx.from}}</p>
-          </div>
-          <div>
-            <p>Amount: {{tx.ethValue}} ether</p>
-            <p>Gas: {{tx.gas}}</p>
-          </div>
-        </router-link>
-      </li>
-    </transition-group>
-  </div>
+<template lang="pug">
+  div#txs
+    h2 Pending Txs
+    transition-group.list(name="item" tag="ul")
+      li.item(v-for="tx in txs" :key="tx.hash" v-bind:class="{contract: tx.input!='0x'}")
+        router-link(:to="{path: `/tx/${tx.hash}`}")
+          p TX# {{tx.hash}}
+          div
+            p From: {{tx.from}}
+            p To: {{tx.from}}
+          div
+            p Amount: {{tx.ethValue}} ether
+            p Gas: {{tx.gas}}
 </template>
 
 <script>

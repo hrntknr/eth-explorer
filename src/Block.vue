@@ -1,30 +1,22 @@
-<template>
-  <div class="mask" v-on:click="close">
-    <div class="content">
-      <h1>Block {{$route.params.hash}}</h1>
-      <div v-if="block">
-        <p>Number: {{block.number}}</p>
-        <p>Gas: {{block.gasUsed}}({{(block.gasUsed/block.gasLimit*100).toFixed(2)}}%)</p>
-        <p>GasLimit: {{block.gasLimit}}</p>
-        <p>ExtraData: {{block.extraData}}</p>
-        <p>Miner: {{block.miner}}</p>
-        <p>Difficulty: {{block.difficulty}}</p>
-        <p>Time: {{block.time}}   ({{block.timestamp}})</p>
-        <div>
-          <p>
-            <a v-on:click="extend" href="javascript:void(0);">Transactions({{block.transactions.length}})</a>
-          </p>
-          <div v-if="extended">
-            <p id="txs" v-for="tx in block.transactions" :key="tx.hash">
-              <router-link :to="{path: `/tx/${tx}`}">{{tx}}</router-link>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div v-else class="loader">
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  div.mask(v-on:click="close")
+    div.content
+      h1 Block {{$route.params.hash}}
+      div(v-if="block")
+        p Number: {{block.number}}
+        p Gas: {{block.gasUsed}}({{(block.gasUsed/block.gasLimit*100).toFixed(2)}}%)
+        p GasLimit: {{block.gasLimit}}
+        p ExtraData: {{block.extraData}}
+        p Miner: {{block.miner}}
+        p Difficulty: {{block.difficulty}}
+        p Time: {{block.time}} ({{block.timestamp}})
+        div
+          p
+            a(v-on:click="extend" href="javascript:void(0);") Transactions({{block.transactions.length}})
+          div(v-if="extended")
+            p#txs(v-for="tx in block.transactions" :key="tx.hash")
+              router-link(:to="{path: `/tx/${tx}`}") {{tx}}
+      div.loader(v-else)
 </template>
 
 <script>

@@ -1,13 +1,11 @@
-<template>
-  <div id="app">
-    <router-view></router-view>
-    <h1>Ethereum block explorer</h1>
-    <div id="content">
-      <BlockList :io="io" />
-      <TxList :io="io" />
-      <ContractList v-for="(contract, id) in contracts" :key="id" :contract="contract" :id="id" :io="io"/>
-    </div>
-  </div>
+<template lang="pug">
+  div#app
+    router-view
+    h1 Ethereum block explorer
+    div#content
+      BlockList(:io="io")
+      TxList(:io="io")
+      ContractList(v-for="(contract, id) in contracts" :key="id" :contract="contract" :id="id" :io="io")
 </template>
 
 <script>

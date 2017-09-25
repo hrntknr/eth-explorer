@@ -1,24 +1,19 @@
-<template>
-  <div class="mask" v-on:click="close">
-    <div class="content">
-      <h1>TX# {{$route.params.hash}}</h1>
-      <div v-if="tx">
-        <p>Value: {{tx.value}} ({{tx.ethValue}} ether)</p>
-        <p>From: {{tx.from}}</p>
-        <p>To: {{tx.to?tx.to:'none'}}</p>
-        <p>Gas: {{tx.gas}}</p>
-        <p>Gas Price: {{tx.gasPrice}}</p>
-        <div id="input">
-          <h2>Input</h2>
-          <pre>{{tx.input}}</pre>
-        </div>
-        <p>Confirm: {{tx.blockNumber!=null}}</p>
-        <p v-if="tx.blockNumber!=null">Block Number: {{tx.blockNumber}}</p>
-      </div>
-      <div v-else class="loader">
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  div.mask(v-on:click="close")
+    div.content
+      h1 TX# {{$route.params.hash}}
+      div(v-if="tx")
+        p Value: {{tx.value}} ({{tx.ethValue}} ether)
+        p From: {{tx.from}}
+        p To: {{tx.to?tx.to:'none'}}
+        p Gas: {{tx.gas}}
+        p Gas Price: {{tx.gasPrice}}
+        div#input
+          h2 Input
+          pre {{tx.input}}
+        p Confirm: {{tx.blockNumber!=null}}
+        p(v-if="tx.blockNumber!=null") Block Number: {{tx.blockNumber}}
+      div.loader(v-else)
 </template>
 
 <script>

@@ -1,29 +1,24 @@
-<template>
-  <div class="mask" v-on:click="close">
-    <div class="content">
-      <h1 v-if="event">Event: {{event.event}}</h1>
-      <h1 v-else>Event</h1>
-      <p>TX# <router-link :to="{path: `/tx/${$route.params.tx_hash}`}">{{$route.params.tx_hash}}</router-link></p>
-      <div v-if="event">
-        <p>Block: <router-link :to="{path: `/block/${event.blockHash}`}">{{event.blockHash}}</router-link></p>
-        <p>Address: {{event.address}}</p>
-        <div>
-          <h2>ReturnValues</h2>
-          <p v-for="(value, key) in event.returnValues" :key="key">{{key}}: {{value}}</p>
-        </div>
-        <div id="rawData">
-          <h2>RawData</h2>
-          <pre>{{event.raw.data}}</pre>
-        </div>
-        <div id="topics">
-          <h2>Topics</h2>
-          <pre v-for="(topic, index) in event.raw.topics" :key="index">{{index}}: {{topic}}</pre>
-        </div>
-      </div>
-      <div v-else class="loader">
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  div.mask(v-on:click="close")
+    div.content
+      h1(v-if="event") Event: {{event.event}}
+      h1(v-else) Event
+      p TX#
+        router-link(:to="{path: `/tx/${$route.params.tx_hash}`}") {{$route.params.tx_hash}}
+      div(v-if="event")
+        p Block:
+          router-link(:to="{path: `/block/${event.blockHash}`}") {{event.blockHash}}
+        p Address: {{event.address}}
+        div
+          h2 ReturnValues
+          p(v-for="(value, key) in event.returnValues" :key="key") {{key}}: {{value}}
+        div#rawData
+          h2 RawData
+          pre {{event.raw.data}}
+        div#topics
+          h2 Topics
+          pre(v-for="(topic, index) in event.raw.topics" :key="index") {{index}}: {{topic}}
+      div.loader(v-else)
 </template>
 
 <script>

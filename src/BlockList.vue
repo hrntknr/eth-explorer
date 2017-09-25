@@ -1,23 +1,17 @@
-<template>
-  <div id="blocks">
-    <h2>Blocks</h2>
-    <transition-group name="item" class="list" tag="ul">
-      <li v-for="block in blocks" :key="block.hash" class="item">
-        <router-link :to="{path: `/block/${block.hash}`}">
-          <div>
-            <p>Block: {{block.number}}</p>
-            <p>{{block.time}}</p>
-          </div>
-          <p>Hash {{block.hash}}</p>
-          <div>
-            <p>GasUsed: {{block.gasUsed}}</p>
-            <p>GasLimit: {{block.gasLimit}}</p>
-            <p>IncludeTx: {{block.transactions.length}}</p>
-          </div>
-        </router-link>
-      </li>
-    </transition-group>
-  </div>
+<template lang="pug">
+  div#blocks
+    h2 Blocks
+    transition-group.list(name="item" tag="ul")
+      li.item(v-for="block in blocks" :key="block.hash")
+        router-link(:to="{path: `/block/${block.hash}`}")
+          div
+            p Block: {{block.number}}
+            p {{block.time}}
+          p Hash {{block.hash}}
+          div
+            p GasUsed: {{block.gasUsed}}
+            p GasLimit: {{block.gasLimit}}
+            p IncludeTx: {{block.transactions.length}}
 </template>
 
 <script>

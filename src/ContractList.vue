@@ -1,15 +1,11 @@
-<template>
-  <div id="contract">
-    <h2>{{contract.title}}</h2>
-    <transition-group name="item" tag="ul" class="list">
-      <li v-for="event in contract.events" :key="event.transactionHash" class="item">
-        <router-link :to="{path: `/event/${id}/${event.transactionHash}`}">
-          <p>TX# {{event.transactionHash}}</p>
-          <p>Event: {{event.event}}</p>
-        </router-link>
-      </li>
-    </transition-group>
-  </div>
+<template lang="pug">
+  div#contract
+    h2 {{contract.title}}
+    transition-group.list(name="item" tag="ul")
+      li.item(v-for="event in contract.events" :key="event.transactionHash")
+        router-link(:to="{path: `/event/${id}/${event.transactionHash}`}")
+          p TX# {{event.transactionHash}}
+          p Event: {{event.event}}
 </template>
 
 <script>
