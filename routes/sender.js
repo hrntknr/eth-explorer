@@ -8,7 +8,9 @@ let io
 const blocks = []
 const txs = []
 const contracts = {}
+const erc20s = {}
 const contracts_instance = {}
+const erc20s_instance = {}
 
 sender.init = (server)=>{
   io = socketio.listen(server)
@@ -21,6 +23,9 @@ sender.init = (server)=>{
     })
     socket.on('reqContracts', ()=>{
       socket.emit('resContracts', contracts)
+    })
+    socket.on('reqERC20s', ()=>{
+      socket.emit('resERC20s', erc20s)
     })
   })
 }
@@ -87,6 +92,21 @@ config.contracts.map((contract, index)=>{
         contracts[index].events.pop()
       }
     })
+  })
+})
+
+config.erc20.map((erc20, index)=>{
+  const cnt = new web3.eth.Contract(erc20.abi, erc20.addr)
+  erc20s_instance[index] = cnt
+  erc20s[index] = erc20
+  erc20s[index].events = []
+  cnt.events.Transfer((err, e)=>{
+    if(err)return console.error(err.stack)
+    broadcast(`erc20tx_${index}`, e)
+    erc20s[index].events.unshift(e)
+    for(;erc20s[index].events.length > 10;) {
+      erc20s[index].events.pop()
+    }
   })
 })
 

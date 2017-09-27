@@ -6,6 +6,7 @@
       BlockList(:io="io")
       TxList(:io="io")
       ContractList(v-for="(contract, id) in contracts" :key="id" :contract="contract" :id="id" :io="io")
+      ERC20List(v-for="(erc20, id) in erc20s" :key="id" :erc20="erc20" :id="id" :io="io")
 </template>
 
 <script>
@@ -13,16 +14,19 @@ import ioClient from 'socket.io-client'
 import BlockList from './BlockList.vue'
 import TxList from './TxList.vue'
 import ContractList from './ContractList.vue'
+import ERC20List from './ERC20List.vue'
 export default {
   name: 'app',
   components: {
     BlockList,
     TxList,
-    ContractList
+    ContractList,
+    ERC20List
   },
   data() {
     return {
       contracts: {},
+      erc20s: {},
       io: null
     }
   },
@@ -31,6 +35,10 @@ export default {
     this.io.emit('reqContracts')
     this.io.on('resContracts', (contracts)=>{
       this.$set(this, 'contracts', contracts)
+    })
+    this.io.emit('reqERC20s')
+    this.io.on('resERC20s', (erc20s)=>{
+      this.$set(this, 'erc20s', erc20s)
     })
   }
 }
