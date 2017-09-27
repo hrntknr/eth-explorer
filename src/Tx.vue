@@ -47,10 +47,13 @@ export default {
 <style lang="scss" scoped>
 #input {
   background-color: #f6f8fa;
-}
-pre {
-  white-space: pre-wrap;
-  word-wrap: break-word;
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
 }
 .mask {
   position: fixed;
@@ -75,9 +78,6 @@ pre {
 }
 h1 {
   font-size: 1.5em;
-}
-h2 {
-  font-size: 1.2em;
 }
 
 .loader,

@@ -6,7 +6,9 @@
         p Number: {{block.number}}
         p Gas: {{block.gasUsed}}({{(block.gasUsed/block.gasLimit*100).toFixed(2)}}%)
         p GasLimit: {{block.gasLimit}}
-        p ExtraData: {{block.extraData}}
+        div#extraData
+          h2 ExtraData
+          pre {{block.extraData}}
         p Miner: {{block.miner}}
         p Difficulty: {{block.difficulty}}
         p Time: {{block.time}} ({{block.timestamp}})
@@ -80,6 +82,16 @@ export default {
 }
 h1 {
   font-size: 1.5em;
+}
+#extraData {
+  background-color: #f6f8fa;
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
 }
 
 .loader,
