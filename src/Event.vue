@@ -3,10 +3,10 @@
     div.content
       h1(v-if="event") Event: {{event.event}}
       h1(v-else) Event
-      p TX#
+      p TX# 
         router-link(:to="{path: `/tx/${$route.params.tx_hash}`}") {{$route.params.tx_hash}}
       div(v-if="event")
-        p Block:
+        p Block: 
           router-link(:to="{path: `/block/${event.blockHash}`}") {{event.blockHash}}
         p Address: {{event.address}}
         div
