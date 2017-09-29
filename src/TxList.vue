@@ -7,7 +7,7 @@
           p TX# {{tx.hash}}
           div
             p From: {{tx.from}}
-            p To: {{tx.from}}
+            p To: {{tx.to}}
           div
             p Amount: {{tx.ethValue}} ether
             p Gas: {{tx.gas}}
