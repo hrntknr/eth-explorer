@@ -1,19 +1,23 @@
 # Ethereum block explorer
 
-## Description
+## Overview
+WIP
+### Features
+- contract event support
+- erc20 support
 
 ## Requirement
 Node.js v6
 go-ethereum(geth)
 
-## Install
+## Installation
 ```
 npm install
 npm run build
 ```
 Edit config.js
 
-## Run
+## Usage
 ```
 geth --ws --wsapi "eth,web3" --wsorigins "*"
 ```
