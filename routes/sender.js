@@ -2,6 +2,7 @@ const socketio = require('socket.io')
 const Web3 = require('web3')
 const BigNumber = require('bignumber.js')
 const config = require('../config')
+const standardErc20abi = require('../erc20abi.json')
 const web3 = new Web3(config.web3.provider)
 const sender = Object.create(null)
 let io
@@ -96,7 +97,7 @@ config.contracts.map((contract, index)=>{
 })
 
 config.erc20.map((erc20, index)=>{
-  const cnt = new web3.eth.Contract(erc20.abi, erc20.addr)
+  const cnt = new web3.eth.Contract(erc20.abi?erc20.abi:standardErc20abi, erc20.addr)
   erc20s_instance[index] = cnt
   erc20s[index] = erc20
   erc20s[index].events = []
